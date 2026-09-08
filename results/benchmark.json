@@ -1,0 +1,407 @@
+{
+  "method": "Original ZKML logical-plan generation and hardware-calibrated cost estimator",
+  "test_row_ids": [
+    410087,
+    432275,
+    379424,
+    414862,
+    419852,
+    407378,
+    377846,
+    394892,
+    403177,
+    415528
+  ],
+  "platform": "macOS-14.5-arm64-arm-64bit",
+  "threads": 4,
+  "binary_sha256": "cfa658c81fff79052e1f703dfb54b0e1cf023b9086d43f1493b170409d964bb1",
+  "summary": {
+    "fixed_40": {
+      "median_proving_s": 2.2861965,
+      "proving_iqr_s": 0.027822614499999787,
+      "median_verification_s": 0.017489875000000002,
+      "proof_bytes": 18144,
+      "peak_process_rss_bytes": 92209152
+    },
+    "optimized": {
+      "median_proving_s": 0.7058283335,
+      "proving_iqr_s": 0.05507864650000005,
+      "median_verification_s": 0.0067646045,
+      "proof_bytes": 5024,
+      "peak_process_rss_bytes": 39452672
+    }
+  },
+  "raw_blocks": {
+    "fixed_40": [
+      {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.284078125,
+            "public_value_preparation_s": 0.003211417,
+            "score_integer": 12,
+            "verification_s": 0.017730958,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.277118416,
+            "public_value_preparation_s": 0.003290417,
+            "score_integer": 39,
+            "verification_s": 0.017370416,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.288314875,
+            "public_value_preparation_s": 0.003228625,
+            "score_integer": 74,
+            "verification_s": 0.017575167,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 3,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_3.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.280596625,
+            "public_value_preparation_s": 0.003789042,
+            "score_integer": 56,
+            "verification_s": 0.017752166,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 4,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_4.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.271809042,
+            "public_value_preparation_s": 0.003613208,
+            "score_integer": 69,
+            "verification_s": 0.017446708,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 87244800,
+        "proving_key_bytes": 6492580,
+        "proving_key_s": 0.025479125,
+        "scale_factor": 128,
+        "setup_s": 0.216574625,
+        "verification_key_bytes": 4104,
+        "verification_key_s": 0.535641541,
+        "warmup_proofs": 1
+      },
+      {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.311647084,
+            "public_value_preparation_s": 0.003376042,
+            "score_integer": 61,
+            "verification_s": 0.017479375,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.280409584,
+            "public_value_preparation_s": 0.003747959,
+            "score_integer": 89,
+            "verification_s": 0.017345834,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.436863375,
+            "public_value_preparation_s": 0.00329275,
+            "score_integer": 41,
+            "verification_s": 0.017516208,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 3,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_3.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.2981745829999998,
+            "public_value_preparation_s": 0.00308825,
+            "score_integer": 13,
+            "verification_s": 0.01749725,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 4,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_4.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.343661667,
+            "public_value_preparation_s": 0.004954708,
+            "score_integer": 84,
+            "verification_s": 0.0174825,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 92209152,
+        "proving_key_bytes": 6492580,
+        "proving_key_s": 0.025424959,
+        "scale_factor": 128,
+        "setup_s": 0.2406205,
+        "verification_key_bytes": 4104,
+        "verification_key_s": 0.511439334,
+        "warmup_proofs": 1
+      }
+    ],
+    "optimized": [
+      {
+        "columns": 10,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_0.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.696449709,
+            "public_value_preparation_s": 0.002588959,
+            "score_integer": 12,
+            "verification_s": 0.006725209,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_1.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.682304625,
+            "public_value_preparation_s": 0.002441666,
+            "score_integer": 39,
+            "verification_s": 0.006386584,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_2.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.687403917,
+            "public_value_preparation_s": 0.0024135,
+            "score_integer": 74,
+            "verification_s": 0.006397584,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 3,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_3.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.689999458,
+            "public_value_preparation_s": 0.002556709,
+            "score_integer": 56,
+            "verification_s": 0.006804,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 4,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_4.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.715206958,
+            "public_value_preparation_s": 0.002500459,
+            "score_integer": 69,
+            "verification_s": 0.007031541,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 38928384,
+        "proving_key_bytes": 2558260,
+        "proving_key_s": 0.012245416,
+        "scale_factor": 128,
+        "setup_s": 0.216576584,
+        "verification_key_bytes": 2184,
+        "verification_key_s": 0.166157208,
+        "warmup_proofs": 1
+      },
+      {
+        "columns": 10,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_0.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.737583167,
+            "public_value_preparation_s": 0.002469458,
+            "score_integer": 61,
+            "verification_s": 0.006917875,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_1.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.74644375,
+            "public_value_preparation_s": 0.002617792,
+            "score_integer": 89,
+            "verification_s": 0.006863875,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_2.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.747426083,
+            "public_value_preparation_s": 0.002672958,
+            "score_integer": 41,
+            "verification_s": 0.007002417,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 3,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_3.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.745408209,
+            "public_value_preparation_s": 0.00263675,
+            "score_integer": 13,
+            "verification_s": 0.006538667,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 4,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_4.msgpack",
+            "proof_bytes": 5024,
+            "proving_s": 0.68783125,
+            "public_value_preparation_s": 0.002474042,
+            "score_integer": 84,
+            "verification_s": 0.006717334,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 39452672,
+        "proving_key_bytes": 2558260,
+        "proving_key_s": 0.014645542,
+        "scale_factor": 128,
+        "setup_s": 0.219269459,
+        "verification_key_bytes": 2184,
+        "verification_key_s": 0.167957709,
+        "warmup_proofs": 1
+      }
+    ]
+  },
+  "speedup": 3.239026249716285,
+  "latency_reduction": 0.6912652374806803,
+  "optimizer_wall_s": 1122.1232759589911,
+  "calibration_wall_s": 87.9121180420043,
+  "optimizer_result_sha256": "a4c704f08987e4f0397dfc4160aedc1d9f3b7eea6405abdc1fcc7a2ad429e8de",
+  "baseline_choice": {
+    "valid": true,
+    "columns": 40,
+    "implementation": 2,
+    "estimated_ns": 3082295243.0286546,
+    "k": 11,
+    "arithmetic_rows": 39,
+    "arithmetic_k": 6,
+    "capacity_checks": [
+      {
+        "k": 10,
+        "valid": false,
+        "log": "artifacts/optimizer/candidates/c40_i2/capacity_k10/mock.log"
+      },
+      {
+        "k": 11,
+        "valid": true
+      }
+    ],
+    "model_path": "artifacts/optimizer/candidates/c40_i2/model.msgpack",
+    "model_sha256": "5d5f8c11d503392150ecfef0878fbf4bac33c0c3e0b06a44a97f24f2e0316927",
+    "range_corners_checked": 16
+  },
+  "optimized_choice": {
+    "valid": true,
+    "columns": 10,
+    "implementation": 2,
+    "estimated_ns": 835697011.5242139,
+    "k": 11,
+    "arithmetic_rows": 116,
+    "arithmetic_k": 7,
+    "capacity_checks": [
+      {
+        "k": 10,
+        "valid": false,
+        "log": "artifacts/optimizer/candidates/c10_i2/capacity_k10/mock.log"
+      },
+      {
+        "k": 11,
+        "valid": true
+      }
+    ],
+    "model_path": "artifacts/optimizer/candidates/c10_i2/model.msgpack",
+    "model_sha256": "8ae3f4cd88e813570cee1d6a17bb4fe227fd6cd2352f43f7e7e801c263a52b9d",
+    "range_corners_checked": 16
+  }
+}

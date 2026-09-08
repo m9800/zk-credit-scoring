@@ -1,0 +1,13 @@
+{
+  "method": "Original ZKML Criterion KZG microbenchmarks; range adapted from 13..19 to 10..14",
+  "calibration_wall_s": 87.9121180420043,
+  "compilation_excluded": true,
+  "warmup_seconds": 0.5,
+  "measurement_seconds": 2,
+  "samples": 30,
+  "rayon_threads": 4,
+  "platform": "macOS-14.5-arm64-arm-64bit",
+  "rustc": "rustc 1.100.0-nightly (5a2be9f5f 2026-09-06)",
+  "summary_sha256": "f5536303dd4ce5f9d00f323ac80ec8574d73485c0772f3b4f38cee07589c0b68",
+  "adapter_sha256": "835812d57d241391ca6ee6c944c3904920a9f1462c2cc42fb487cbc1f92cb8b3"
+}

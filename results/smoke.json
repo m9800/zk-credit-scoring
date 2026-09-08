@@ -7,21 +7,21 @@
       "index": 0,
       "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/smoke/inputs/input_0.msgpack",
       "proof_bytes": 5024,
-      "proving_s": 1.105989917,
-      "public_value_preparation_s": 0.00379025,
+      "proving_s": 1.099119041,
+      "public_value_preparation_s": 0.003676083,
       "score_integer": 74,
-      "verification_s": 0.006496208,
+      "verification_s": 0.00643225,
       "verified": true,
       "wrong_score_rejected": true,
       "wrong_weight_rejected": true
     }
   ],
-  "peak_process_rss_bytes": 45514752,
+  "peak_process_rss_bytes": 51625984,
   "proving_key_bytes": 5115700,
-  "proving_key_s": 0.02042725,
+  "proving_key_s": 0.020956583,
   "scale_factor": 128,
-  "setup_s": 0.427245584,
+  "setup_s": 0.425220291,
   "verification_key_bytes": 3720,
-  "verification_key_s": 0.274300541,
+  "verification_key_s": 0.271069667,
   "warmup_proofs": 1
 }

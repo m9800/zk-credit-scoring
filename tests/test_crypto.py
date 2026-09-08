@@ -3,6 +3,7 @@ import os
 import shutil
 import subprocess
 import pytest
+import msgpack
 from scripts.common import ROOT
 from scripts.zk import BINARY
 
@@ -37,3 +38,26 @@ def test_standalone_verifier_rejects_tampering(smoke_proof, tmp_path, mutation):
     content[index] ^= 1
     path.write_bytes(content)
     assert verify(smoke_proof, tmp_path).returncode != 0
+
+
+def test_original_estimator_fails_on_missing_calibration(smoke_proof, tmp_path):
+    (tmp_path / "summary.msgpack").write_bytes(msgpack.packb({}))
+    result = subprocess.run([str(BINARY.parent / "zkml-estimate"),
+                             str(smoke_proof / "public_model.msgpack"),
+                             str(smoke_proof / "inputs/input_0.msgpack"), "kzg"],
+                            cwd=tmp_path, capture_output=True, text=True)
+    assert result.returncode != 0
+    assert "Missing calibration" in result.stderr
+
+
+def test_original_estimator_respects_validated_k_floor(smoke_proof, tmp_path):
+    # Synthetic coefficients test control flow only; never used in experiments.
+    profile = {f"kzg_{op}": {str(k): 1.0 for k in range(8, 18)}
+               for op in ("fft", "msm", "permute", "add", "mul")}
+    (tmp_path / "summary.msgpack").write_bytes(msgpack.packb(profile))
+    result = subprocess.run([str(BINARY.parent / "zkml-estimate"),
+                             str(smoke_proof / "public_model.msgpack"),
+                             str(smoke_proof / "inputs/input_0.msgpack"), "kzg"],
+                            cwd=tmp_path, capture_output=True, text=True, check=True)
+    from scripts.optimize import parse_estimate
+    assert parse_estimate(result.stdout)["k"] == 12

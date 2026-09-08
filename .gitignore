@@ -9,5 +9,6 @@ data/processed/
 artifacts/runs/
 artifacts/zk/
 artifacts/smoke/
+artifacts/optimizer/
 *.params
 target/

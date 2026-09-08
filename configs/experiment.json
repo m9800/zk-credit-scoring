@@ -13,7 +13,8 @@
   "max_probability_error": 0.03,
   "classification_threshold": 0.5,
   "baseline_columns": 40,
-  "search_columns": [10, 15, 20, 30, 40],
+  "optimizer_min_columns": 10,
+  "optimizer_max_columns": 100,
   "num_randoms": 1024,
   "benchmark_observations": 10,
   "rayon_threads": 4

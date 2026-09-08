@@ -1,4 +1,4 @@
-.PHONY: setup build smoke data train validate evaluate test benchmark
+.PHONY: setup build smoke data train validate evaluate test calibrate optimize benchmark
 
 setup:
 	git submodule update --init --recursive
@@ -28,3 +28,9 @@ test:
 
 benchmark:
 	uv run --frozen python -m scripts.benchmark
+
+calibrate:
+	uv run --frozen python -m scripts.calibrate
+
+optimize:
+	uv run --frozen python -m scripts.optimize

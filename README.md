@@ -46,7 +46,7 @@ make smoke test
 make data train validate evaluate
 ```
 
-`make benchmark` runs bounded empirical configuration tuning and then the held-out benchmark. This is explicitly **not** the original paper's calibrated cost-estimator optimizer. The benchmark scope is being confirmed with the team before final measurements.
+Run `make calibrate optimize benchmark` for the original ZKML optimizer and the held-out comparison. Calibration is hardware-specific; regenerate it on the benchmark machine. The optimizer uses the authors' logical-plan generator and original cost formulas across all six implementations and 10–100 columns, selecting by estimated cost rather than measured proof time.
 
 Large datasets, circuit variants, parameters and proof-run directories are ignored by Git; the small trained model, configuration, raw result JSON files and reproducible scripts are retained. Regenerate ignored outputs using the commands above.
 
@@ -63,11 +63,29 @@ The model configuration, verification key and SRS must come from the trusted app
 
 On 66,445 held-out test observations, FP32 ROC-AUC is 0.7731 and average precision is 0.6989. Fixed-point average precision is 0.6950, classification disagreement is 0.68%, and maximum probability deviation is 0.00801. These are predictive/numerical results, not proof timings. Full measurements are in `results/test_metrics.json`.
 
-The six fixed-width tuning candidates all pass at `k=11`; three validation proofs per candidate give median proving times around 2.29–2.40 seconds on the recorded machine. These preliminary tuning measurements are **not** the final held-out comparison. See `results/tuning.json` and `docs/implementation-plan.md` for status.
+`results/tuning.json` retains the earlier preliminary 40-column experiments for provenance. These measurements are not used to choose either configuration in the original-optimizer experiment.
 
-The primary comparison keeps the trained model, preprocessing, fixed-point scale, public/private boundary, KZG backend, observations and hardware constant. A paper-style fixed-width baseline uses 40 columns and the minimum valid `k`; the alternative explores a bounded set of column counts. All six published fully connected implementations are candidates for both, subject to validity and matching numerical outputs.
+Measured on the recorded M2 Pro, ten held-out proofs per configuration:
 
-Tuning uses validation observations; final measurements use held-out observations. We report median and IQR of proving time, verification time, proof bytes, peak process RSS, setup/key costs, and tuning time. RSS is a process-wide peak including setup, not an isolated prover allocation measurement. No speedup is assumed in advance.
+| Metric | Fixed 40 columns | Original optimizer: 10 columns |
+|---|---:|---:|
+| Median proving time | 2.286 s | 0.706 s |
+| Proving-time IQR | 0.028 s | 0.055 s |
+| Median verification time | 17.490 ms | 6.765 ms |
+| Proof size | 18,144 bytes | 5,024 bytes |
+| Peak process RSS | 87.94 MiB | 37.63 MiB |
+
+Both selected implementation 2 and `k=11` (2,048 rows). The measured speedup is **3.24×**, or **69.13% lower proving latency**, with identical integer scores. `results/benchmark.json` contains every measurement, setup/key costs and configuration fingerprints. These results are specific to this model, baseline and machine.
+
+The primary comparison keeps the trained model, preprocessing, fixed-point scale, public/private boundary, KZG backend, observations and hardware constant. A paper-style fixed-width baseline minimizes estimated cost at 40 columns and the minimum validated `k`; the optimized configuration minimizes the same estimate over 546 candidates. All six published fully connected implementations are candidates for both.
+
+Forty columns follows the paper's Table 10 ablation, where the width was motivated by much larger models. It is not claimed to be the best manually tuned baseline for this tiny classifier.
+
+Small-model adapters extend the original microbenchmark domain to `k=10..14`, reject missing coefficients and prevent the arithmetic-row estimate from choosing a `k` smaller than the circuit's validated requirement. All 16 preprocessing-domain corners are checked before estimation. The upstream submodule and cost formulas remain unchanged; `build.rs` generates the adapted sources. See `docs/original-optimizer.md` for exact changes and limitations.
+
+Final measurements use ten held-out observations per configuration in alternating blocks. We report median and IQR of proving time, verification time, proof bytes, peak process RSS, setup/key costs, calibration time and optimizer time. RSS includes setup. Feasibility checks are included in optimizer wall time, so that number is not directly comparable to the paper's optimizer latency.
+
+Calibration took 87.9 s; optimization took 1122.1 s, including 1110.5 s of conservative feasibility checks and 6.23 s of estimator calls. This up-front cost must be amortized over repeated inferences; faster individual proofs do not imply faster one-off deployment.
 
 The application is a small implementation of a use case already mentioned in the paper, not a novel credit-scoring proposal. A richer model, IPA comparison, authenticated data access, threshold-only disclosure, and on-chain verification are feasible extensions but out of scope for this three-day submission.
 
