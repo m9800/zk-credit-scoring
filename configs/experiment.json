@@ -1,0 +1,20 @@
+{
+  "seed": 42,
+  "dataset_revision": "652ff62223a4d939a35eb9dd94a18cbc652c8a13",
+  "dataset_file": "0xFDC1BE05aD924e6Fc4Ab2c6443279fF7C0AB5544_training_data.parquet",
+  "features_4": ["wallet_age", "borrow_count", "repay_count", "risk_factor"],
+  "features_8": ["wallet_age", "borrow_count", "repay_count", "risk_factor", "liquidation_count", "avg_risk_factor", "max_risk_factor", "borrow_repay_diff_eth"],
+  "log_features": ["wallet_age", "borrow_count", "repay_count", "liquidation_count", "avg_risk_factor", "max_risk_factor", "borrow_repay_diff_eth"],
+  "embargo_days": 30,
+  "embargo_status": "Conservative experimental gap; the exact label horizon is not yet independently confirmed.",
+  "scale_candidates": [32, 128, 512],
+  "max_ap_degradation": 0.01,
+  "max_disagreement": 0.01,
+  "max_probability_error": 0.03,
+  "classification_threshold": 0.5,
+  "baseline_columns": 40,
+  "search_columns": [10, 15, 20, 30, 40],
+  "num_randoms": 1024,
+  "benchmark_observations": 10,
+  "rayon_threads": 4
+}

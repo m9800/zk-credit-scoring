@@ -1,0 +1,36 @@
+{
+  "selected_features": 4,
+  "candidates": [
+    {
+      "features": 4,
+      "validation": {
+        "average_precision": 0.6129685286814235,
+        "roc_auc": 0.6388097300625657,
+        "brier": 0.21977842206475529,
+        "positive_rate": 0.36238767878347483,
+        "n": 56423
+      }
+    },
+    {
+      "features": 8,
+      "validation": {
+        "average_precision": 0.6145682405800412,
+        "roc_auc": 0.6575999245961064,
+        "brier": 0.2109519576514666,
+        "positive_rate": 0.36238767878347483,
+        "n": 56423
+      }
+    }
+  ],
+  "selection_rule": "Smallest feature set within 0.01 validation average precision of best",
+  "training": "scikit-learn LogisticRegression, C=1, LBFGS; transferred to equivalent Keras Dense",
+  "constant_validation": {
+    "average_precision": 0.36238767878347483,
+    "roc_auc": 0.5,
+    "brier": 0.23274615171035162,
+    "positive_rate": 0.36238767878347483,
+    "n": 56423
+  },
+  "training_positive_rate": 0.4034157504046436,
+  "test_evaluated": false
+}

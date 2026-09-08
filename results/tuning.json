@@ -1,0 +1,464 @@
+{
+  "method": "Bounded empirical tuning; NOT the original ZKML cost-estimator optimizer",
+  "manifest": {
+    "model_sha256": "2794f9d6ae26c91f14e0e207679910b9cb994a6b40eedf4f5838eea2b5058d65",
+    "scale": 128,
+    "columns": [
+      40
+    ],
+    "implementations": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "validation_rows": [
+      347003,
+      315106,
+      353739
+    ],
+    "k_start": 10,
+    "rayon_threads": 4
+  },
+  "tuning_wall_s": 72.50156100001186,
+  "baseline_choice": {
+    "columns": 40,
+    "implementation": 2,
+    "k": 11
+  },
+  "tuned_choice": {
+    "columns": 40,
+    "implementation": 2,
+    "k": 11
+  },
+  "candidates": [
+    {
+      "columns": 40,
+      "implementation": 0,
+      "k": 11,
+      "summary": {
+        "median_proving_s": 2.35682275,
+        "proving_iqr_s": 0.017127708000000297,
+        "median_verification_s": 0.017620625,
+        "proof_bytes": 18144,
+        "peak_process_rss_bytes": 93093888
+      },
+      "report": {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i0/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.35682275,
+            "public_value_preparation_s": 0.003892208,
+            "score_integer": 16,
+            "verification_s": 0.017300708,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i0/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.36531475,
+            "public_value_preparation_s": 0.00394125,
+            "score_integer": 14,
+            "verification_s": 0.017620625,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i0/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.331059334,
+            "public_value_preparation_s": 0.004261625,
+            "score_integer": 78,
+            "verification_s": 0.017961917,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 93093888,
+        "proving_key_bytes": 6492836,
+        "proving_key_s": 0.026863042,
+        "scale_factor": 128,
+        "setup_s": 0.220415292,
+        "verification_key_bytes": 4360,
+        "verification_key_s": 0.518408542,
+        "warmup_proofs": 1
+      },
+      "capacity_failures": [
+        {
+          "k": 10,
+          "error": "mock failed (101): /Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i0/capacity/mock.log"
+        }
+      ]
+    },
+    {
+      "columns": 40,
+      "implementation": 1,
+      "k": 11,
+      "summary": {
+        "median_proving_s": 2.316577875,
+        "proving_iqr_s": 0.01156043750000002,
+        "median_verification_s": 0.016627708,
+        "proof_bytes": 18144,
+        "peak_process_rss_bytes": 111230976
+      },
+      "report": {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i1/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.321196042,
+            "public_value_preparation_s": 0.0039645,
+            "score_integer": 16,
+            "verification_s": 0.0169435,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i1/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.298075167,
+            "public_value_preparation_s": 0.003583,
+            "score_integer": 14,
+            "verification_s": 0.016625875,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i1/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.316577875,
+            "public_value_preparation_s": 0.003471166,
+            "score_integer": 78,
+            "verification_s": 0.016627708,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 111230976,
+        "proving_key_bytes": 6492836,
+        "proving_key_s": 0.026321041,
+        "scale_factor": 128,
+        "setup_s": 0.214079417,
+        "verification_key_bytes": 4360,
+        "verification_key_s": 0.525161458,
+        "warmup_proofs": 1
+      },
+      "capacity_failures": [
+        {
+          "k": 10,
+          "error": "mock failed (101): /Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i1/capacity/mock.log"
+        }
+      ]
+    },
+    {
+      "columns": 40,
+      "implementation": 2,
+      "k": 11,
+      "summary": {
+        "median_proving_s": 2.291949167,
+        "proving_iqr_s": 0.005217062499999869,
+        "median_verification_s": 0.017132375,
+        "proof_bytes": 18144,
+        "peak_process_rss_bytes": 99172352
+      },
+      "report": {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i2/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.284613375,
+            "public_value_preparation_s": 0.003152709,
+            "score_integer": 16,
+            "verification_s": 0.017895,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i2/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.2950475,
+            "public_value_preparation_s": 0.002994583,
+            "score_integer": 14,
+            "verification_s": 0.017132375,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i2/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.291949167,
+            "public_value_preparation_s": 0.003275291,
+            "score_integer": 78,
+            "verification_s": 0.016812292,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 99172352,
+        "proving_key_bytes": 6492580,
+        "proving_key_s": 0.026336958,
+        "scale_factor": 128,
+        "setup_s": 0.213777708,
+        "verification_key_bytes": 4104,
+        "verification_key_s": 0.50809175,
+        "warmup_proofs": 1
+      },
+      "capacity_failures": [
+        {
+          "k": 10,
+          "error": "mock failed (101): /Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i2/capacity/mock.log"
+        }
+      ]
+    },
+    {
+      "columns": 40,
+      "implementation": 3,
+      "k": 11,
+      "summary": {
+        "median_proving_s": 2.400715417,
+        "proving_iqr_s": 0.030561375,
+        "median_verification_s": 0.016837916,
+        "proof_bytes": 18144,
+        "peak_process_rss_bytes": 86507520
+      },
+      "report": {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i3/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.361706,
+            "public_value_preparation_s": 0.0039405,
+            "score_integer": 16,
+            "verification_s": 0.016837916,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i3/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.400715417,
+            "public_value_preparation_s": 0.004240709,
+            "score_integer": 14,
+            "verification_s": 0.01704175,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i3/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.42282875,
+            "public_value_preparation_s": 0.004531541,
+            "score_integer": 78,
+            "verification_s": 0.016691916,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 86507520,
+        "proving_key_bytes": 6492836,
+        "proving_key_s": 0.026045541,
+        "scale_factor": 128,
+        "setup_s": 0.213329083,
+        "verification_key_bytes": 4360,
+        "verification_key_s": 0.5065755,
+        "warmup_proofs": 1
+      },
+      "capacity_failures": [
+        {
+          "k": 10,
+          "error": "mock failed (101): /Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i3/capacity/mock.log"
+        }
+      ]
+    },
+    {
+      "columns": 40,
+      "implementation": 4,
+      "k": 11,
+      "summary": {
+        "median_proving_s": 2.30105475,
+        "proving_iqr_s": 0.0064753744999999086,
+        "median_verification_s": 0.016931542,
+        "proof_bytes": 18144,
+        "peak_process_rss_bytes": 81133568
+      },
+      "report": {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i4/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.301989708,
+            "public_value_preparation_s": 0.003582375,
+            "score_integer": 16,
+            "verification_s": 0.0170095,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i4/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.289038959,
+            "public_value_preparation_s": 0.003682417,
+            "score_integer": 14,
+            "verification_s": 0.016526791,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i4/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.30105475,
+            "public_value_preparation_s": 0.003220542,
+            "score_integer": 78,
+            "verification_s": 0.016931542,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 81133568,
+        "proving_key_bytes": 6492836,
+        "proving_key_s": 0.027096583,
+        "scale_factor": 128,
+        "setup_s": 0.215513334,
+        "verification_key_bytes": 4360,
+        "verification_key_s": 0.509738292,
+        "warmup_proofs": 1
+      },
+      "capacity_failures": [
+        {
+          "k": 10,
+          "error": "mock failed (101): /Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i4/capacity/mock.log"
+        }
+      ]
+    },
+    {
+      "columns": 40,
+      "implementation": 5,
+      "k": 11,
+      "summary": {
+        "median_proving_s": 2.299924458,
+        "proving_iqr_s": 0.0515883119999998,
+        "median_verification_s": 0.01674875,
+        "proof_bytes": 18144,
+        "peak_process_rss_bytes": 94240768
+      },
+      "report": {
+        "columns": 40,
+        "k": 11,
+        "measurements": [
+          {
+            "altered_proof_rejected": true,
+            "index": 0,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i5/inputs/input_0.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.298231292,
+            "public_value_preparation_s": 0.00348,
+            "score_integer": 16,
+            "verification_s": 0.01680125,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 1,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i5/inputs/input_1.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.401407916,
+            "public_value_preparation_s": 0.003377875,
+            "score_integer": 14,
+            "verification_s": 0.01674875,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          },
+          {
+            "altered_proof_rejected": true,
+            "index": 2,
+            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i5/inputs/input_2.msgpack",
+            "proof_bytes": 18144,
+            "proving_s": 2.299924458,
+            "public_value_preparation_s": 0.003595125,
+            "score_integer": 78,
+            "verification_s": 0.016745,
+            "verified": true,
+            "wrong_score_rejected": true,
+            "wrong_weight_rejected": true
+          }
+        ],
+        "peak_process_rss_bytes": 94240768,
+        "proving_key_bytes": 6492580,
+        "proving_key_s": 0.026200458,
+        "scale_factor": 128,
+        "setup_s": 0.213750917,
+        "verification_key_bytes": 4104,
+        "verification_key_s": 0.508784,
+        "warmup_proofs": 1
+      },
+      "capacity_failures": [
+        {
+          "k": 10,
+          "error": "mock failed (101): /Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/tune_c40_i5/capacity/mock.log"
+        }
+      ]
+    }
+  ]
+}

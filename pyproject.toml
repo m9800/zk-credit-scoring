@@ -1,0 +1,20 @@
+[project]
+name = "zk-credit-scoring"
+version = "0.1.0"
+description = "A reproducible small credit-risk inference experiment using ZKML and Halo2/KZG"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "tensorflow-macos==2.15.0; sys_platform == 'darwin' and platform_machine == 'arm64'",
+  "tensorflow==2.15.0; sys_platform != 'darwin' or platform_machine != 'arm64'",
+  "numpy==1.26.4",
+  "pandas==2.2.3",
+  "pyarrow==17.0.0",
+  "scikit-learn==1.5.2",
+  "msgpack==1.0.8",
+  "tflite==2.10.0",
+  "pytest==8.3.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

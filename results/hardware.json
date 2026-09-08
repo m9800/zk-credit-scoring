@@ -1,0 +1,12 @@
+{
+  "cpu": "Apple M2 Pro",
+  "logical_cpus": 10,
+  "ram_bytes": 17179869184,
+  "os": "macOS 14.5 (23F79)",
+  "architecture": "arm64",
+  "rayon_threads": 4,
+  "rustc": "1.100.0-nightly (5a2be9f5f 2026-09-06)",
+  "python": "3.11.5",
+  "tensorflow": "tensorflow-macos 2.15.0",
+  "note": "Peak process RSS includes setup and key generation. No claim of isolated prover-only peak memory."
+}

@@ -1,0 +1,6 @@
+{
+  "scale_factor": 128,
+  "minimum_k_from_ranges": 10,
+  "reference_crosscheck_observations": 16,
+  "classification_threshold": 0.5
+}

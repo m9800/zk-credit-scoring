@@ -1,0 +1,9 @@
+{
+  "operations": [
+    "FULLY_CONNECTED",
+    "LOGISTIC"
+  ],
+  "tflite_sha256": "2794f9d6ae26c91f14e0e207679910b9cb994a6b40eedf4f5838eea2b5058d65",
+  "preprocessing_sha256": "2bbfe4a8ec6eaf605062421e0fa969d903abd7984b6e5e0eca3a1c5a6def196a",
+  "seed": 42
+}

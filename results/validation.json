@@ -1,0 +1,58 @@
+{
+  "keras_tflite_max_error": 1.1920928955078125e-07,
+  "tflite_metrics": {
+    "average_precision": 0.6129685264577521,
+    "roc_auc": 0.6388097348205781,
+    "brier": 0.21977842048060214,
+    "positive_rate": 0.36238767878347483,
+    "n": 56423
+  },
+  "scales": [
+    {
+      "scale_factor": 32,
+      "metrics": {
+        "average_precision": 0.5998737278316582,
+        "roc_auc": 0.6392070506098854,
+        "brier": 0.21999164998648602,
+        "positive_rate": 0.36238767878347483,
+        "n": 56423
+      },
+      "classification_disagreement": 0.021179306311256047,
+      "max_probability_error": 0.02966246008872986,
+      "passes_tolerances": false,
+      "max_abs_logit_integer": 76
+    },
+    {
+      "scale_factor": 128,
+      "metrics": {
+        "average_precision": 0.6096945813069182,
+        "roc_auc": 0.6385808166465488,
+        "brier": 0.21992170019041438,
+        "positive_rate": 0.36238767878347483,
+        "n": 56423
+      },
+      "classification_disagreement": 0.0051751945128759545,
+      "max_probability_error": 0.008129388093948364,
+      "passes_tolerances": true,
+      "max_abs_logit_integer": 303
+    },
+    {
+      "scale_factor": 512,
+      "metrics": {
+        "average_precision": 0.6122327130311722,
+        "roc_auc": 0.6388450134436419,
+        "brier": 0.2197716059190448,
+        "positive_rate": 0.36238767878347483,
+        "n": 56423
+      },
+      "classification_disagreement": 0.001116565939421867,
+      "max_probability_error": 0.001859903335571289,
+      "passes_tolerances": true,
+      "max_abs_logit_integer": 1211
+    }
+  ],
+  "selected_scale": 128,
+  "mock_crosscheck_count": 16,
+  "reference_matches_mock": true,
+  "test_used_for_selection": false
+}

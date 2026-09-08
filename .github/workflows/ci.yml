@@ -1,0 +1,20 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: astral-sh/setup-uv@v6
+      - name: Install pinned dependencies
+        run: uv sync --frozen
+      - name: Build proof harness
+        run: cargo build --release --locked
+      - name: Test preprocessing, fixed-point reference and real proofs
+        run: uv run --frozen pytest -q

@@ -1,0 +1,16 @@
+[package]
+name = "credit-zk"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[[bin]]
+name = "credit-zk"
+path = "zk/main.rs"
+
+[dependencies]
+zkml = { path = "vendor/zkml" }
+halo2_proofs = { path = "vendor/zkml/halo2/halo2_proofs", features = ["circuit-params"] }
+rand = "0.8.5"
+serde_json = "1.0"
+libc = "0.2"
