@@ -65,9 +65,24 @@ On 66,445 held-out test observations, FP32 ROC-AUC is 0.7731 and average precisi
 
 `results/tuning.json` retains the earlier preliminary 40-column experiments for provenance. These measurements are not used to choose either configuration in the original-optimizer experiment.
 
+### What are we comparing?
+
+We compare two circuits that prove the **same trained four-feature model**, not two different ML models. The optimizer changes how the calculation is arranged inside the circuit; it does not retrain the model or change its weights. Inputs, preprocessing, fixed-point scale, public/private settings, proof backend and hardware stay the same.
+
+Think of the circuit as a table holding inputs and intermediate calculations, with rules checking that they fit together correctly. Here, **columns means working columns in that table** (called *advice columns*), not dataset features. There are also separate columns for constants and public values. More working columns can fit calculations into fewer rows, but add cryptographic work. Fewer columns are not always better.
+
+- **Baseline:** fix the width at 40 columns and choose the lowest estimated-cost option among six implementations of the fully connected layer.
+- **Full search:** consider those same six implementations at every width from 10 to 100 columns: 546 candidates. Choose the one with the lowest estimated cost.
+
+Both use the smallest `k` that passes our feasibility checks for each candidate. The baseline therefore includes some optimization: this is **fixed-width versus full-search**, not optimization switched off versus on. ZKML can also prove a manually configured circuit without running the optimizer.
+
+The 40-column reference comes from the paper's Table 10, which studied larger models. We do not claim it is the best manual choice for our small model.
+
+### Measured results
+
 Measured on the recorded M2 Pro, ten held-out proofs per configuration:
 
-| Metric | Fixed 40 columns | Original optimizer: 10 columns |
+| Metric | Baseline: fixed 40 columns | Full search: selected 10 columns |
 |---|---:|---:|
 | Median proving time | 2.286 s | 0.706 s |
 | Proving-time IQR | 0.028 s | 0.055 s |
@@ -75,11 +90,7 @@ Measured on the recorded M2 Pro, ten held-out proofs per configuration:
 | Proof size | 18,144 bytes | 5,024 bytes |
 | Peak process RSS | 87.94 MiB | 37.63 MiB |
 
-Both selected implementation 2 and `k=11` (2,048 rows). The measured speedup is **3.24×**, or **69.13% lower proving latency**, with identical integer scores. `results/benchmark.json` contains every measurement, setup/key costs and configuration fingerprints. These results are specific to this model, baseline and machine.
-
-The primary comparison keeps the trained model, preprocessing, fixed-point scale, public/private boundary, KZG backend, observations and hardware constant. A paper-style fixed-width baseline minimizes estimated cost at 40 columns and the minimum validated `k`; the optimized configuration minimizes the same estimate over 546 candidates. All six published fully connected implementations are candidates for both.
-
-Forty columns follows the paper's Table 10 ablation, where the width was motivated by much larger models. It is not claimed to be the best manually tuned baseline for this tiny classifier.
+Both selected implementation 2 and `k=11` (2,048 rows). In this case, reducing the width from 40 to 10 columns did not require a larger row domain. The measured speedup is **3.24×**, or **69.13% lower proving latency**, with identical integer scores. `results/benchmark.json` contains every measurement, setup/key costs and configuration fingerprints. These results are specific to this model, baseline and machine.
 
 Small-model adapters extend the original microbenchmark domain to `k=10..14`, reject missing coefficients and prevent the arithmetic-row estimate from choosing a `k` smaller than the circuit's validated requirement. All 16 preprocessing-domain corners are checked before estimation. The upstream submodule and cost formulas remain unchanged; `build.rs` generates the adapted sources. See `docs/original-optimizer.md` for exact changes and limitations.
 
