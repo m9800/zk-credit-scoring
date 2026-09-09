@@ -99,7 +99,3 @@ Final measurements use ten held-out observations per configuration in alternatin
 Calibration took 87.9 s; optimization took 1122.1 s, including 1110.5 s of conservative feasibility checks and 6.23 s of estimator calls. This up-front cost must be amortized over repeated inferences; faster individual proofs do not imply faster one-off deployment.
 
 The application is a small implementation of a use case already mentioned in the paper, not a novel credit-scoring proposal. A richer model, IPA comparison, authenticated data access, threshold-only disclosure, and on-chain verification are feasible extensions but out of scope for this three-day submission.
-
-## Team contributions
-
-To be filled by the team before submission with each member's actual contributions. AI-assisted work must be reviewed and understood by the authors.
