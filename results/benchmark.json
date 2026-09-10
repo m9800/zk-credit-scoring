@@ -40,7 +40,7 @@
           {
             "altered_proof_rejected": true,
             "index": 0,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_0.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_0/inputs/input_0.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.284078125,
             "public_value_preparation_s": 0.003211417,
@@ -53,7 +53,7 @@
           {
             "altered_proof_rejected": true,
             "index": 1,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_1.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_0/inputs/input_1.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.277118416,
             "public_value_preparation_s": 0.003290417,
@@ -66,7 +66,7 @@
           {
             "altered_proof_rejected": true,
             "index": 2,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_2.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_0/inputs/input_2.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.288314875,
             "public_value_preparation_s": 0.003228625,
@@ -79,7 +79,7 @@
           {
             "altered_proof_rejected": true,
             "index": 3,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_3.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_0/inputs/input_3.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.280596625,
             "public_value_preparation_s": 0.003789042,
@@ -92,7 +92,7 @@
           {
             "altered_proof_rejected": true,
             "index": 4,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_0/inputs/input_4.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_0/inputs/input_4.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.271809042,
             "public_value_preparation_s": 0.003613208,
@@ -119,7 +119,7 @@
           {
             "altered_proof_rejected": true,
             "index": 0,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_0.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_1/inputs/input_0.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.311647084,
             "public_value_preparation_s": 0.003376042,
@@ -132,7 +132,7 @@
           {
             "altered_proof_rejected": true,
             "index": 1,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_1.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_1/inputs/input_1.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.280409584,
             "public_value_preparation_s": 0.003747959,
@@ -145,7 +145,7 @@
           {
             "altered_proof_rejected": true,
             "index": 2,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_2.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_1/inputs/input_2.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.436863375,
             "public_value_preparation_s": 0.00329275,
@@ -158,7 +158,7 @@
           {
             "altered_proof_rejected": true,
             "index": 3,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_3.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_1/inputs/input_3.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.2981745829999998,
             "public_value_preparation_s": 0.00308825,
@@ -171,7 +171,7 @@
           {
             "altered_proof_rejected": true,
             "index": 4,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_fixed_40_1/inputs/input_4.msgpack",
+            "input": "artifacts/runs/original_optimizer_fixed_40_1/inputs/input_4.msgpack",
             "proof_bytes": 18144,
             "proving_s": 2.343661667,
             "public_value_preparation_s": 0.004954708,
@@ -200,7 +200,7 @@
           {
             "altered_proof_rejected": true,
             "index": 0,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_0.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_0/inputs/input_0.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.696449709,
             "public_value_preparation_s": 0.002588959,
@@ -213,7 +213,7 @@
           {
             "altered_proof_rejected": true,
             "index": 1,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_1.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_0/inputs/input_1.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.682304625,
             "public_value_preparation_s": 0.002441666,
@@ -226,7 +226,7 @@
           {
             "altered_proof_rejected": true,
             "index": 2,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_2.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_0/inputs/input_2.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.687403917,
             "public_value_preparation_s": 0.0024135,
@@ -239,7 +239,7 @@
           {
             "altered_proof_rejected": true,
             "index": 3,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_3.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_0/inputs/input_3.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.689999458,
             "public_value_preparation_s": 0.002556709,
@@ -252,7 +252,7 @@
           {
             "altered_proof_rejected": true,
             "index": 4,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_0/inputs/input_4.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_0/inputs/input_4.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.715206958,
             "public_value_preparation_s": 0.002500459,
@@ -279,7 +279,7 @@
           {
             "altered_proof_rejected": true,
             "index": 0,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_0.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_1/inputs/input_0.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.737583167,
             "public_value_preparation_s": 0.002469458,
@@ -292,7 +292,7 @@
           {
             "altered_proof_rejected": true,
             "index": 1,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_1.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_1/inputs/input_1.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.74644375,
             "public_value_preparation_s": 0.002617792,
@@ -305,7 +305,7 @@
           {
             "altered_proof_rejected": true,
             "index": 2,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_2.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_1/inputs/input_2.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.747426083,
             "public_value_preparation_s": 0.002672958,
@@ -318,7 +318,7 @@
           {
             "altered_proof_rejected": true,
             "index": 3,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_3.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_1/inputs/input_3.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.745408209,
             "public_value_preparation_s": 0.00263675,
@@ -331,7 +331,7 @@
           {
             "altered_proof_rejected": true,
             "index": 4,
-            "input": "/Users/mateocesaroni/Documents/Facu/eci-zk/trabajo final/artifacts/runs/original_optimizer_optimized_1/inputs/input_4.msgpack",
+            "input": "artifacts/runs/original_optimizer_optimized_1/inputs/input_4.msgpack",
             "proof_bytes": 5024,
             "proving_s": 0.68783125,
             "public_value_preparation_s": 0.002474042,

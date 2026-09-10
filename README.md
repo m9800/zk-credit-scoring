@@ -32,14 +32,14 @@ Python scripts handle reproducible data preparation, training, export, numerical
 
 Tests cover chronological splits and frozen preprocessing, fixed-point rounding, acceptance of a genuine proof, and rejection of changed scores, changed model parameters and altered proof bytes. Mock tests also reject inconsistent public values. These are regression tests of concrete attacks, not a cryptographic soundness proof or an audit of upstream gadgets.
 
-The CI workflow runs a real tiny KZG proof without downloading the dataset. CI is configured but has not run on GitHub while this repository remains local.
+The CI workflow runs tests, including a real tiny KZG proof, without downloading the dataset. The [run for commit `6f9aa6f`](https://github.com/m9800/zk-credit-scoring/actions/runs/34416952809) passed on GitHub.
 
 ## Reproduction
 
 Requirements: Git, Python 3.11, uv, Rust/rustup, and a C/C++ build toolchain. The tested machine is an Apple M2 Pro with 16 GiB RAM, macOS 14.5; proving uses four Rayon threads. Python dependencies and Rust dependencies are locked. Rust nightly is pinned in `rust-toolchain.toml`.
 
 ```sh
-git clone --recurse-submodules <repository-url>
+git clone --recurse-submodules https://github.com/m9800/zk-credit-scoring.git
 cd zk-credit-scoring
 make setup build
 make smoke test
@@ -48,7 +48,7 @@ make data train validate evaluate
 
 Run `make calibrate optimize benchmark` for the original ZKML optimizer and the held-out comparison. Calibration is hardware-specific; regenerate it on the benchmark machine. The optimizer uses the authors' logical-plan generator and original cost formulas across all six implementations and 10–100 columns, selecting by estimated cost rather than measured proof time.
 
-Large datasets, circuit variants, parameters and proof-run directories are ignored by Git; the small trained model, configuration, raw result JSON files and reproducible scripts are retained. Regenerate ignored outputs using the commands above.
+Large datasets, circuit variants, parameters and proof-run directories are ignored by Git; the small trained model, configuration, raw result JSON files and reproducible scripts are retained. Paths in published results are relative to the repository root. Regenerate ignored outputs using the commands above.
 
 Example standalone verification after `make smoke`:
 

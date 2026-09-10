@@ -9,6 +9,7 @@ data/processed/
 artifacts/runs/
 artifacts/zk/
 artifacts/smoke/
+results/smoke.json
 artifacts/optimizer/
 *.params
 target/

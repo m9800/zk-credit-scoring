@@ -1,10 +1,10 @@
 # Implementation status
 
-The submission is due September 10, 2026. Keep one trained logistic regression and KZG only.
+This project evaluates one trained logistic regression using KZG proofs. The submission deadline is September 10, 2026.
 
-## Completed locally
+## Completed
 
-- Initialized the local Git repository; nothing has been published.
+- Published the repository at https://github.com/m9800/zk-credit-scoring.
 - Pinned the original ZKML source as an unmodified submodule.
 - Built upstream binaries and a separate application proof harness.
 - Downloaded and hashed the pinned Spectral Parquet file (442,961 rows).
@@ -22,24 +22,25 @@ The submission is due September 10, 2026. Keep one trained logistic regression a
 - Implemented the full 10–100-column / six-implementation search and final paired benchmark scripts.
 - Completed all 546 candidates: estimator selected implementation 2 at 10 columns, k=11; the 40-column baseline independently selected implementation 2, k=11.
 - Completed ten held-out proofs per configuration: median proving time 2.286 s → 0.706 s (3.24× speedup), with identical scores and all tampering checks rejected.
-- Added English documentation, locked dependencies, twelve passing local tests and a CI workflow.
+- Added English documentation, locked dependencies, local tests and a CI workflow. The [GitHub CI run for commit `6f9aa6f`](https://github.com/m9800/zk-credit-scoring/actions/runs/34416952809) passed.
 
-## Pending decisions and work
+## Remaining work
 
-1. Confirm the Spectral target horizon from an authoritative source. The 30-day gap is explicitly provisional; do not claim verified leakage-free labels.
+1. Confirm the Spectral target horizon from an authoritative source. Until then, the 30-day gap does not guarantee leakage-free labels.
 2. Team review of code, assumptions and results; add actual member contributions.
-3. Publish the repository only at the user's requested final stage. CI has not run remotely yet.
+3. Reproduce the full experiment on a second machine. CI checks the small proof and tests, not the complete dataset and optimizer benchmark.
 
-## Differences from the teammate's proposal
+## Design decisions
 
-- Compatibility smoke test comes first.
+- A small smoke test checks framework compatibility before the full experiment.
 - Logistic regression is fitted by scikit-learn LBFGS and copied into an equivalent Keras model, avoiding neural-network optimizer tuning.
 - Public weights and bias directly bind the approved model, avoiding a hash gadget for five numbers. Features remain private, the integer score is public.
 - Scale is selected on validation, never on test.
-- Baseline selection uses only validation observations; final benchmark uses separate test observations.
-- Following the team's decision, the original calibrated cost estimator replaces the proposed empirical search. Earlier 40-column measurements are retained only as preliminary data, not used for selection.
+- Both circuit configurations are selected by estimated cost after checking the 16 corners of the feature domain defined by training-only preprocessing. Neither validation observations nor test observations are used to rank circuit candidates. The final benchmark uses held-out test observations.
+- The original calibrated cost estimator selects the circuits. Earlier 40-column proof measurements are retained as preliminary data, not used for selection.
 - KZG SRS generation is local and experimental, not a multiparty ceremony.
-- Claim future-event prediction for the published liquidation-risk label; do not claim generalized unsecured creditworthiness or unseen-wallet generalization.
+- Evaluation measures future-event prediction for the published liquidation-risk label, not unsecured creditworthiness or generalization to unseen wallets.
+- Published JSON reports use repository-relative paths; local working files can retain absolute paths. Existing reports were updated only to remove the machine-specific path prefix, without changing measurements or artifact hashes.
 
 ## Original-optimizer benchmark commands
 

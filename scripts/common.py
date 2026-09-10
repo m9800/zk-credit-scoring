@@ -9,8 +9,22 @@ def config():
     return json.loads((ROOT / "configs/experiment.json").read_text())
 
 
+def relative_result_paths(value):
+    """Remove the local checkout prefix from paths in a JSON report."""
+    if isinstance(value, dict):
+        return {key: relative_result_paths(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [relative_result_paths(item) for item in value]
+    if isinstance(value, str):
+        return value.replace(ROOT.as_posix() + "/", "")
+    return value
+
+
 def save_json(path, value):
     path = Path(path)
+    # Result reports are portable; executable input manifests keep their paths.
+    if path.resolve().is_relative_to(ROOT / "results"):
+        value = relative_result_paths(value)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n")
 
