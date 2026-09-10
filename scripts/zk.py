@@ -8,6 +8,8 @@ import sys
 import msgpack
 import numpy as np
 from scripts.common import ROOT, config, save_json
+from scripts.circuit_plan import CircuitPlan
+from scripts.fixed_point import evaluate
 
 BINARY = ROOT / "vendor/zkml/target/release/credit-zk"
 
@@ -31,11 +33,25 @@ def convert(tflite, output, scale):
 
 
 def write_model(model, path, columns=10, k=12, implementation=1):
+    """Write a variant using a scalar, complete CircuitPlan, or None to preserve.
+
+    Existing scalar callers keep their behavior. Optimizer integration can pass
+    a complete plan or None so later layers are not silently overwritten.
+    """
     model = copy.deepcopy(model)
     model["num_cols"] = columns
     model["k"] = k
+    if implementation is None:
+        plan = CircuitPlan.from_model(model)
+    elif isinstance(implementation, CircuitPlan):
+        plan = implementation
+    else:
+        count = sum(layer["layer_type"] == "FullyConnected" for layer in model["layers"])
+        plan = CircuitPlan((implementation,) * count)
+    plan.assign(model)
     for layer in model["layers"]:
-        layer["implementation"] = implementation if layer["layer_type"] == "FullyConnected" else 0
+        if layer["layer_type"] != "FullyConnected":
+            layer["implementation"] = 0
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     Path(path).write_bytes(msgpack.packb(model, use_bin_type=True))
     return model
@@ -69,19 +85,9 @@ def run(mode, model_path, inputs_path, output, timeout=600):
 
 
 def reference(model, x):
-    tensors = {t["idx"]: np.asarray(t["data"], dtype=np.int64).reshape(t["shape"]) for t in model["tensors"]}
-    fc = model["layers"][0]
-    sf = model["global_sf"]
-    weights = tensors[fc["inp_idxes"][1]].reshape(-1)
-    bias = int(tensors[fc["inp_idxes"][2]].reshape(-1)[0])
-    xq = np.rint(np.asarray(x, dtype=np.float32) * sf).astype(np.int64)
-    dot = xq @ weights
-    # Upstream rounded_div uses nearest-integer division; ties go towards +infinity
-    # after the gadget shifts its numerator to the positive range.
-    logit = (2 * dot + sf) // (2 * sf) + bias
-    probability = 1 / (1 + np.exp(-logit.astype(np.float64) / sf))
-    yq = np.floor(probability * sf + 0.5).astype(np.int64)
-    return yq, logit
+    """Retain the score/logit API for existing logistic callers."""
+    inference = evaluate(model, x)
+    return inference.scores, inference.logits
 
 
 def smoke():

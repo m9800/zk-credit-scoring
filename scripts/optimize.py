@@ -65,8 +65,8 @@ def logical_models(sf):
     return models
 
 
-def feature_corners():
-    state = json.loads((ROOT / "artifacts/model/preprocessing.json").read_text())
+def feature_corners(preprocessing=ROOT / "artifacts/model/preprocessing.json"):
+    state = json.loads(preprocessing.read_text())
     low = (np.array(state["lower"]) - state["means"]) / state["stds"]
     high = (np.array(state["upper"]) - state["means"]) / state["stds"]
     return np.asarray(list(itertools.product(*zip(low, high))), dtype=np.float32)
@@ -160,4 +160,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--model", choices=("logistic", "neural"), default="logistic")
+    args = parser.parse_args()
+    if args.model == "neural":
+        from scripts.neural_optimizer import NeuralOptimizer
+        NeuralOptimizer().run()
+    else:
+        main()
