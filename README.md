@@ -2,6 +2,10 @@
 
 ECI 2026 final project based on [ZKML: An Optimizing System for ML Inference in Zero-Knowledge Proofs](https://ddkang.github.io/papers/2024/zkml-eurosys.pdf). A four-feature logistic regression predicts the Spectral liquidation-risk label. Halo2/KZG proves a single inference with private features and publicly bound model weights and output.
 
+## Scope Change: 
+The project originally aimed to adapt this implementation for smart-contract-based on-chain verification of model inference, but we changed direction to explore the "trustless public scoring" use case described in the aforementioned paper
+
+
 ## Application and trust assumptions
 
 The prover knows a preprocessed feature vector `x`. The verifier knows the approved quantized weights `w`, bias `b`, circuit configuration, and verification key. The statement is that the public integer score is the output of the configured fixed-point model on some private `x`. Weight and bias cells are exposed as public instances alongside the score, and the verifier checks them against the approved model. Five public parameters are simpler than a model-hash circuit for this tiny model.
@@ -98,4 +102,10 @@ Final measurements use ten held-out observations per configuration in alternatin
 
 Calibration took 87.9 s; optimization took 1122.1 s, including 1110.5 s of conservative feasibility checks and 6.23 s of estimator calls. This up-front cost must be amortized over repeated inferences; faster individual proofs do not imply faster one-off deployment.
 
-The application is a small implementation of a use case already mentioned in the paper, not a novel credit-scoring proposal. A richer model, IPA comparison, authenticated data access, threshold-only disclosure, and on-chain verification are feasible extensions but out of scope for this three-day submission.
+The application is a small implementation of a use case already mentioned in the paper, not a novel credit-scoring proposal. A richer model, IPA comparison, authenticated data access, threshold-only disclosure, and on-chain verification are feasible extensions but out of scope for the time being
+
+## Possible extensions/experiments
+- Replace single-party SRS with a multiparty ceremony to remove the single trusted party.
+- Support recursion or aggregation for batches of proofs.
+- A more diverse benchmarking process featuring richer models, and better proving hardware.
+- On-chain deployment and validation of the application via smart-contracts.
