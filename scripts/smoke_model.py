@@ -6,7 +6,7 @@ import tensorflow as tf
 from scripts.common import ROOT, save_json
 
 
-def export(model, path):
+def export(model, path, fully_connected_layers=1):
     converter = tf.lite.TFLiteConverter.from_keras_model(model)
     converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS]
     path.write_bytes(converter.convert())
@@ -14,7 +14,7 @@ def export(model, path):
     interpreter.allocate_tensors()
     operations = [op["op_name"] for op in interpreter._get_ops_details()
                   if op["op_name"] != "DELEGATE"]
-    if operations != ["FULLY_CONNECTED", "LOGISTIC"]:
+    if operations != ["FULLY_CONNECTED"] * fully_connected_layers + ["LOGISTIC"]:
         raise ValueError(f"Unexpected TFLite operations: {operations}")
     return operations
 

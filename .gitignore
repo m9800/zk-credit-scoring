@@ -11,5 +11,6 @@ artifacts/zk/
 artifacts/smoke/
 results/smoke.json
 artifacts/optimizer/
+artifacts/comparison/
 *.params
 target/

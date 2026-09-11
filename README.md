@@ -8,7 +8,7 @@ The project originally aimed to adapt this implementation for smart-contract-bas
 
 ## Application and trust assumptions
 
-The prover knows a preprocessed feature vector `x`. The verifier knows the approved quantized weights `w`, bias `b`, circuit configuration, and verification key. The statement is that the public integer score is the output of the configured fixed-point model on some private `x`. Weight and bias cells are exposed as public instances alongside the score, and the verifier checks them against the approved model. Five public parameters are simpler than a model-hash circuit for this tiny model.
+The prover knows a preprocessed feature vector `x`. The verifier knows the approved quantized weights `w`, bias `b`, circuit configuration, and verification key. The statement is that the public integer score is the output of the configured fixed-point model on some private `x`. Weight and bias cells are exposed as public instances alongside the score, and the verifier checks them against the approved model. The logistic baseline exposes five parameters; the neural network exposes all 2,433 parameters.
 
 Feature extraction, preprocessing, identity, and data authenticity are assumed correct and are **not proven**. The proof does not establish honest training, predictive accuracy, fairness, or real-world creditworthiness. Dataset inputs are already public; this is a demonstration of the protocol, not a claim that published records become secret. There is no smart contract or automatic lending decision.
 
@@ -18,7 +18,9 @@ We use the [authors' implementation](https://github.com/uiuc-kang-lab/zkml) at c
 
 The harness generates a local experimental KZG SRS. This is a trusted single-party setup, not the paper's multiparty ceremony. Setup and key generation are excluded from per-proof timing and reported separately.
 
-## Dataset and model
+## Baseline implementation
+
+### Dataset and model
 
 [Spectral](https://huggingface.co/datasets/spectrallabs/credit-scoring-training-dataset) provides observations immediately before borrow events. Its challenge label includes actual liquidation and technical liquidation (health factor below 1.2), not conventional unsecured-loan default. Download revision and SHA-256 are recorded in `data/manifest.json`.
 
@@ -30,7 +32,7 @@ For reliable, simple fitting we use scikit-learn's LBFGS logistic regression and
 
 Scale 128 passes validation tolerances; scale 32 does not. A vectorized fixed-point reference is checked against actual ZKML mock circuits, including extreme and near-threshold observations. Held-out test evaluation happens after model and scale selection. Complete test-set metrics use the checked reference; we do not generate a proof for every test row.
 
-## Implementation and correctness
+### Implementation and correctness
 
 Python scripts handle reproducible data preparation, training, export, numerical validation and experiments. The Rust harness wraps upstream constraints, binds public model parameters, separates timings, reuses keys, saves proof artifacts and supports standalone verification without private inputs.
 
@@ -38,7 +40,7 @@ Tests cover chronological splits and frozen preprocessing, fixed-point rounding,
 
 The CI workflow runs tests, including a real tiny KZG proof, without downloading the dataset. The [run for commit `6f9aa6f`](https://github.com/m9800/zk-credit-scoring/actions/runs/34416952809) passed on GitHub.
 
-## Reproduction
+### Reproduction
 
 Requirements: Git, Python 3.11, uv, Rust/rustup, and a C/C++ build toolchain. The tested machine is an Apple M2 Pro with 16 GiB RAM, macOS 14.5; proving uses four Rayon threads. Python dependencies and Rust dependencies are locked. Rust nightly is pinned in `rust-toolchain.toml`.
 
@@ -63,46 +65,89 @@ vendor/zkml/target/release/credit-zk verify \
 
 The model configuration, verification key and SRS must come from the trusted application configuration, not be accepted indiscriminately from the prover.
 
-## Performance and scope
+## Neural network implementation
 
-On 66,445 held-out test observations, FP32 ROC-AUC is 0.7731 and average precision is 0.6989. Fixed-point average precision is 0.6950, classification disagreement is 0.68%, and maximum probability deviation is 0.00801. These are predictive/numerical results, not proof timings. Full measurements are in `results/test_metrics.json`.
+The logistic regression above is the **prediction baseline**. The new comparison reuses its saved model, preprocessing and chronological splits, training only a **4 → 64 → 32 → 1 neural network** with 2,433 parameters. See [`scripts/models.py`](scripts/models.py) and [`scripts/train_comparison.py`](scripts/train_comparison.py).
+
+### Inference and circuit optimization
+
+The three fully connected (FC) layers feed their outputs into the next:
+
+```text
+h1 = ReLU(x W1ᵀ + b1)       W1: 64 × 4
+h2 = ReLU(h1 W2ᵀ + b2)      W2: 32 × 64
+p  = sigmoid(h2 W3ᵀ + b3)   W3: 1 × 32
+```
+
+The [NN optimizer](scripts/neural_optimizer.py) enumerates all `6³ = 216` per-layer plans across 10–100 columns, reusing the upstream cost estimator. The NN's public parameters plus score require at least `k=12`, giving **19,656 candidates** in the calibrated range. Each run estimates them, then checks circuits in cost order to select a fixed-40 reference and an optimized layout. Proof timings do not select layouts. Feasibility checks cover feature corners and validation samples, not every possible input.
+
+### Running
+
+After setup and the data download:
+
+```sh
+make train-comparison build validate-neural
+make calibrate optimize-neural benchmark-neural
+```
+
+The existing validation and benchmark commands accept `--model neural`. Retraining requires revalidation and optimization; calibration is machine-specific.
+
+## Measured results
+
+### Prediction quality
+
+The comparison reuses the saved logistic baseline and evaluates both models on the same 66,445 test observations:
+
+| Floating-point metric | Logistic baseline | Neural network |
+|---|---:|---:|
+| Average precision | 0.6989 | 0.7165 |
+| ROC-AUC | 0.7731 | 0.7852 |
+| Brier score (lower is better) | 0.1645 | 0.1534 |
+
+This previously inspected test split remains exploratory. The original logistic fixed-point evaluation reported AP 0.6950, classification disagreement 0.68%, and maximum probability deviation 0.00801; see `results/test_metrics.json`.
 
 `results/tuning.json` retains the earlier preliminary 40-column experiments for provenance. These measurements are not used to choose either configuration in the original-optimizer experiment.
 
-### What are we comparing?
+### Circuit comparison
 
-We compare two circuits that prove the **same trained four-feature model**, not two different ML models. The optimizer changes how the calculation is arranged inside the circuit; it does not retrain the model or change its weights. Inputs, preprocessing, fixed-point scale, public/private settings, proof backend and hardware stay the same.
+For each model, we compare fixed-width and optimized circuits that prove the **same trained model**. The optimizer changes how the calculation is arranged inside the circuit; it does not retrain the model or change its weights. Inputs, preprocessing, fixed-point scale, public/private settings, proof backend and hardware stay the same.
 
 Think of the circuit as a table holding inputs and intermediate calculations, with rules checking that they fit together correctly. Here, **columns means working columns in that table** (called *advice columns*), not dataset features. There are also separate columns for constants and public values. More working columns can fit calculations into fewer rows, but add cryptographic work. Fewer columns are not always better.
 
-- **Baseline:** fix the width at 40 columns and choose the lowest estimated-cost option among six implementations of the fully connected layer.
-- **Full search:** consider those same six implementations at every width from 10 to 100 columns: 546 candidates. Choose the one with the lowest estimated cost.
+- **Fixed-width reference:** keep 40 columns and choose the lowest estimated-cost FC plan: six plans for logistic regression, 216 for the NN.
+- **Full search:** consider those plans at every width from 10 to 100 columns: 546 candidates for logistic regression, 19,656 for the NN.
 
-Both use the smallest `k` that passes our feasibility checks for each candidate. The baseline therefore includes some optimization: this is **fixed-width versus full-search**, not optimization switched off versus on. ZKML can also prove a manually configured circuit without running the optimizer.
+Both use the smallest `k` that passes our feasibility checks for each candidate. The fixed-width reference therefore includes some optimization: this is **fixed-width versus full-search**, not optimization switched off versus on. ZKML can also prove a manually configured circuit without running the optimizer.
 
 The 40-column reference comes from the paper's Table 10, which studied larger models. We do not claim it is the best manual choice for our small model.
 
-### Measured results
+### Proof benchmarks
 
-Measured on the recorded M2 Pro, ten held-out proofs per configuration:
+Ten held-out proofs per configuration:
 
-| Metric | Baseline: fixed 40 columns | Full search: selected 10 columns |
-|---|---:|---:|
-| Median proving time | 2.286 s | 0.706 s |
-| Proving-time IQR | 0.028 s | 0.055 s |
-| Median verification time | 17.490 ms | 6.765 ms |
-| Proof size | 18,144 bytes | 5,024 bytes |
-| Peak process RSS | 87.94 MiB | 37.63 MiB |
+| Metric | Baseline: fixed 40 columns | Full search: selected 10 columns | NN 40 cols | NN 10 cols |
+|---|---:|---:|---:|---:|
+| Median proving time | 2.286 s | 0.706 s | 12.452 s | 3.568 s |
+| Proving-time IQR | 0.028 s | 0.055 s | 0.366 s | 0.196 s |
+| Median verification time | 17.490 ms | 6.765 ms | 46.533 ms | 22.180 ms |
+| Proof size | 18,144 bytes | 5,024 bytes | 23,328 bytes | 6,368 bytes |
+| Peak process RSS | 87.94 MiB | 37.63 MiB | 153.12 MiB | 54.13 MiB |
 
-Both selected implementation 2 and `k=11` (2,048 rows). In this case, reducing the width from 40 to 10 columns did not require a larger row domain. The measured speedup is **3.24×**, or **69.13% lower proving latency**, with identical integer scores. `results/benchmark.json` contains every measurement, setup/key costs and configuration fingerprints. These results are specific to this model, baseline and machine.
+The logistic layouts selected implementation 2 and `k=11` (2,048 rows). In this case, reducing the width from 40 to 10 columns did not require a larger row domain. The measured speedup is **3.24×**, or **69.13% lower proving latency**, with identical integer scores. `results/benchmark.json` contains every measurement, setup/key costs and configuration fingerprints. These results are specific to this model, baseline and machine.
 
 Small-model adapters extend the original microbenchmark domain to `k=10..14`, reject missing coefficients and prevent the arithmetic-row estimate from choosing a `k` smaller than the circuit's validated requirement. All 16 preprocessing-domain corners are checked before estimation. The upstream submodule and cost formulas remain unchanged; `build.rs` generates the adapted sources. See `docs/original-optimizer.md` for exact changes and limitations.
 
 Final measurements use ten held-out observations per configuration in alternating blocks. We report median and IQR of proving time, verification time, proof bytes, peak process RSS, setup/key costs, calibration time and optimizer time. RSS includes setup. Feasibility checks are included in optimizer wall time, so that number is not directly comparable to the paper's optimizer latency.
 
-Calibration took 87.9 s; optimization took 1122.1 s, including 1110.5 s of conservative feasibility checks and 6.23 s of estimator calls. This up-front cost must be amortized over repeated inferences; faster individual proofs do not imply faster one-off deployment.
+For logistic regression, calibration took 87.9 s; optimization took 1122.1 s, including 1110.5 s of conservative feasibility checks and 6.23 s of estimator calls. This up-front cost must be amortized over repeated inferences; faster individual proofs do not imply faster one-off deployment.
 
-The application is a small implementation of a use case already mentioned in the paper, not a novel credit-scoring proposal. A richer model, IPA comparison, authenticated data access, threshold-only disclosure, and on-chain verification are feasible extensions but out of scope for the time being
+For the NN, the full 19,656-candidate search selected `(2, 2, 2)` at both 40 and 10 columns, with scale 128 and `k=12`. Both layouts matched the numerical reference on 45 validation/corner observations.
+
+All 20 NN proofs verified, including rejection checks for changed scores, weights and proof bytes. The measured speedup was **3.49×**; maximum proving times were 13.739 s at 40 columns and 3.920 s at 10 columns.
+
+## Scope
+
+The application is a small implementation of a use case already mentioned in the paper, not a novel credit-scoring proposal. A richer model, IPA comparison, authenticated data access, threshold-only disclosure, and on-chain verification are feasible extensions but out of scope for the time being.
 
 ## Possible extensions/experiments
 - Replace single-party SRS with a multiparty ceremony to remove the single trusted party.
